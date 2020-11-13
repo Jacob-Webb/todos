@@ -1,0 +1,25 @@
+.login-container
+{
+  width: 50%;
+  margin: 4% auto;
+}
+
+::ng-deep mat-tab-body {
+  text-align: center;
+}
+
+@media (max-width: 500px)
+{
+  .login-container
+  {
+    width:75%;
+    margin: 10px auto;
+  }
+}
+@media (max-width: 300px)
+{
+  .login-container
+  {
+    width:100%;
+  }
+}

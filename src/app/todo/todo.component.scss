@@ -1,0 +1,38 @@
+
+#title-field
+{
+  width:50%;
+}
+#date-field
+{
+  width:50%;
+}
+mat-form-field
+{
+  display:block;
+}
+mat-card-content
+{
+  width: 75%;
+  margin: 0 auto;
+}
+mat-card-actions
+{
+  display: flex;
+  justify-content: flex-end;
+}
+@media (max-width: 420px)
+{
+  #title-field
+  {
+    width:100%;
+  }
+  #date-field
+  {
+    width:100%;
+  }
+  mat-card-content
+  {
+    width: 100%;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Update Contact Info</h2>
+  <mat-card>
+    <div class="update-user-form">
+      <mat-card-content>
+        <form [formGroup]="updateUserForm"
+              (ngSubmit)="onSubmit()">
+
+          <div class="contact">
+            <mat-form-field class="register-field" appearance="outline" color="accent">
+              <mat-label>Phone:</mat-label>
+              <input matInput type="tel" id="phone" name="phone" mask="(000) 000-0000" [showMaskTyped] = "false"
+                placeholder="(xxx) xxx-xxxx"[formControl]="updateUserForm.controls['phone']" required>
+              <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+          </div>
+          <mat-card-actions>
+            <button mat-raised-button class="submit" color="primary">Update Contact</button>
+          </mat-card-actions>
+        </form>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>
+

@@ -1,0 +1,30 @@
+.container
+{
+  width:75%;
+  margin: 0 auto;
+}
+.update-user-form
+{
+  width:75%;
+  margin: 0 auto;
+}
+mat-form-field
+{
+  display: block;
+}
+mat-card-actions
+{
+  display: flex;
+  justify-content: flex-end;
+}
+.update-user-field
+{
+  display:block;
+}
+@media (max-width: 500px)
+{
+  .container
+  {
+    width:100%;
+  }
+}

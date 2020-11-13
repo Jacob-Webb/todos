@@ -1,0 +1,40 @@
+<div class="container">
+  <h2 *ngIf="createTodo">Create Task</h2>
+  <h2 *ngIf="!createTodo">Update Task</h2>
+  <form [formGroup]="todoForm"
+  (ngSubmit)="onSubmit()">
+  <mat-card>
+    <mat-card-content>
+
+        <mat-form-field id="title-field" appearance="outline" color="accent">
+          <mat-label>Title:</mat-label>
+          <input matInput type="text" name="title"
+          [formControl]="todoForm.controls['title']">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Description:</mat-label>
+          <textarea matInput type="textarea" id="description" name="description"
+          [formControl]="todoForm.controls['description']" rows="3">
+          </textarea>
+        </mat-form-field>
+
+
+        <mat-form-field id="date-field" appearance="outline" color="accent">
+          <mat-label>Date:</mat-label>
+          <input matInput [matDatepicker]="picker" name="date" placeholder="mm/dd/yyyy"
+          [formControl]="todoForm.controls['date']">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-checkbox *ngIf="!createTodo" [formControl]="todoForm.controls['done']">Completed</mat-checkbox>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Save</button>
+    </mat-card-actions>
+  </mat-card>
+  </form>
+
+</div>

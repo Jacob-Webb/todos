@@ -1,0 +1,20 @@
+.container
+{
+  width:75%;
+  margin: 10px auto;
+}
+
+.error
+{
+  color:red;
+  width:100%;
+  margin: 0 auto;
+}
+@media (max-width: 850px)
+{
+  .container
+  {
+    width:100%;
+  }
+}
+
