@@ -1,7 +1,15 @@
-@import 'custom-theme.scss';
+@import "~@angular/material/theming";
 
-$max-screen:499px;
-$min-screen: 500px;
+$todo-primary: mat-palette($mat-light-blue, 900);
+$todo-accent: mat-palette($mat-blue-gray, 500);
+
+// The warn palette is optional (defaults to red).
+$todo-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$todo-theme: mat-light-theme($todo-primary, $todo-accent, $todo-warn);
+$todo-theme: mat-dark-theme($todo-primary, $todo-accent, $todo-warn);
+
 
 body
 {

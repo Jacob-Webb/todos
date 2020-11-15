@@ -11,13 +11,13 @@
   font-size: 0.9em;
 }
 
-@media (max-width: $max-screen){
+@media (max-width: 499px){
   .nav-menu-show
   {
     display: none;
   }
 }
-@media (min-width: $min-screen){
+@media (min-width: 500px){
   .nav-menu-hide
   {
     display: none;
