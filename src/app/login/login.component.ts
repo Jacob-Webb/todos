@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     */
    this.user = this.basicAuthenticationService.getAuthenticatedUser();
     if (this.user != null) {
-      this.router.navigate(['welcome', this.user]);
+      this.router.navigate(['todos']);
     }
 
     /*

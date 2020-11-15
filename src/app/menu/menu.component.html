@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar color="primary" class="navbar">
-    <div class="logo">Ladaat</div>
+    <!-- <a href="https://jacob-webb.com" class="logo">Jacob Webb</a> -->
     <div class="nav-menu-show">
       <!-- <a mat-button *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/welcome/jacob-webb">Home</a> -->
       <a mat-button *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/todos">Todo List</a>
@@ -8,9 +8,10 @@
       <a mat-icon-button [matMenuTriggerFor]="profile" *ngIf="this.basicAuthenticationService.isUserLoggedIn()"><mat-icon>person</mat-icon></a>
       <a mat-button *ngIf="!this.basicAuthenticationService.isUserLoggedIn()" routerLink="/login">Login</a>
       <mat-menu #profile="matMenu" color="primary">
+        <div *ngIf="this.userName" style="color:white; text-align:center;">{{name}}</div>
         <div>
-          <a mat-menu-item *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/account">Contact Info</a>
-          <a mat-menu-item *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/userPassword">Privacy</a>
+          <a mat-menu-item *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/account">Update Contact Info</a>
+          <a mat-menu-item *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/userPassword">Change Password</a>
           <a mat-menu-item *ngIf="this.basicAuthenticationService.isUserLoggedIn()" routerLink="/logout">Logout</a>
         </div>
       </mat-menu>

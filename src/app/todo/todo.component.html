@@ -1,6 +1,6 @@
 <div class="container">
-  <h2 *ngIf="createTodo">Create Task</h2>
-  <h2 *ngIf="!createTodo">Update Task</h2>
+  <h2 *ngIf="createTodo">Create a Todo</h2>
+  <h2 *ngIf="!createTodo">Update this Todo</h2>
   <form [formGroup]="todoForm"
   (ngSubmit)="onSubmit()">
   <mat-card>

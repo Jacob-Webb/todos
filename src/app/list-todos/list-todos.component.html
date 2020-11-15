@@ -1,5 +1,9 @@
 <div class="container">
-  <button mat-raised-button color="primary" (click)="createTodo()" class="btn btn-primary">Add</button>
+
+  <div *ngIf="">
+    <p>Looks like you don't have any upcoming tasks!</p>
+  </div>
+  <button mat-raised-button color="primary" (click)="createTodo()" class="btn btn-primary">Add Todo</button>
 
   <div *ngFor="let todo of todos" class="card-container">
     <mat-card *ngIf="!todo.done">
@@ -20,10 +24,9 @@
     </mat-card>
   </div>
 <br>
-<h3>Completed Tasks</h3>
 <div *ngFor="let todo of todos" class="card-container">
   <mat-card *ngIf="todo.done">
-    <mat-card-title>{{todo.title}}</mat-card-title>
+    <mat-card-title>{{todo.title}} <span style="font-size:.8em">(completed)</span></mat-card-title>
     <mat-card-content>
       Description:
       <br>
@@ -40,40 +43,6 @@
   </mat-card>
 </div>
 
-
-<div *ngIf="!todos">
-  <p>Looks like you don't have anything coming up! Want to add something?</p>
-</div>
-
 </div>
 
 
-<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div>
-
-<div class="container">
-
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Target Date</th>
-        <th>is Completed</th>
-        <th>Update</th>
-        <th>Delete</th>
-      </tr>
-
-    </thead>
-    <tbody>
-      <tr *ngFor="let todo of todos">
-        <td>{{todo.description}}</td>
-        <td>{{todo.targetDate | date:'shortDate':'UTC' | uppercase}}</td>
-        <td>{{todo.done}}</td>
-        <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
-        <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <button (click)="createTodo()" class="btn btn-primary">Create Event</button>
-
-</div> -->

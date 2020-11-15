@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorComponent implements OnInit {
 
-  errorMessage = 'An Error Ocurred';
+  errorMessage = 'For some reason you\'ve reached a page with an error. You probably tried to reach a page that you don\t have access to. Head back to where you were. If you\'d like to stop encountering this error, don\'t do whatever it was that you just did.'
 
   constructor() { }
 
