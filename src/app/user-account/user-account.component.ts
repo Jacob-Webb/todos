@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../list-users/list-users.component';
-import { AUTHENTICATED_USER, BasicAuthenticationService } from '../service/basic-authentication.service';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import { AUTHENTICATED_USER }  from '../service/data/storage.service';
 import { UserDataService } from '../service/data/user-data.service';
 import { IConfig } from 'ngx-mask'
 
