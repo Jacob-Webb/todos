@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AUTHENTICATED_USER, BasicAuthenticationService } from '../service/basic-authentication.service';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import { AUTHENTICATED_USER } from '../service/data/storage.service';
 import { UserDataService } from '../service/data/user-data.service';
 
 @Component({

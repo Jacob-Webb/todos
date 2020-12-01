@@ -2,11 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BASE_URL } from '../app.constants';
- // @ts-ignore
- import jwt_decode from "jwt-decode";
+import { StorageService } from './data/storage.service';
+import { Observable } from 'rxjs';
 
-export const TOKEN = 'authToken'
-export const AUTHENTICATED_USER = 'authenticateUser'
 export const FIRSTNAME = 'firstName'
 export const LASTNAME = 'lastName'
 
@@ -14,9 +12,11 @@ export const LASTNAME = 'lastName'
   providedIn: 'root'
 })
 export class BasicAuthenticationService {
-  tokenData:any;
-
-  constructor(private http: HttpClient) { }
+  tokenData:any = null;
+  authenticatedUser: string = null;
+  constructor(private http: HttpClient,
+              private storageService: StorageService
+              ) { }
 
   // Pass username and password credentials to the backend
   executeJWTAuthenticationService(username, password) {
@@ -27,8 +27,8 @@ export class BasicAuthenticationService {
       }).pipe(
       map(
         data => {
-          localStorage.setItem(AUTHENTICATED_USER, username);
-          localStorage.setItem(TOKEN, `Bearer ${data.token}`);
+          this.storageService.setAuthenticatedUser(username);
+          this.storageService.setToken(`Bearer ${data.token}`);
           return data;
         }
       )
@@ -36,25 +36,23 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedUser() {
-    return localStorage.getItem(AUTHENTICATED_USER);
+    this.storageService.watchUserStorage().subscribe(user => this.authenticatedUser = user)
+    return this.authenticatedUser;
   }
 
   getAuthenticatedToken() {
-    if (this.getAuthenticatedUser())
-      return localStorage.getItem(TOKEN);
+    if (this.getAuthenticatedUser()) {
+      this.storageService.watchTokenStorage().subscribe(token => this.tokenData = token);
+      return this.tokenData;
+    }
   }
 
   isUserLoggedIn() {
-    let user = localStorage.getItem(AUTHENTICATED_USER)
-    return !(user === null)
+    return !(this.authenticatedUser === null)
   }
 
   logout() {
-    localStorage.clear();
+    this.storageService.clearStorage();
   }
 
-}
-
-export class AuthenticationBean{
-  constructor(public message: string) {}
 }

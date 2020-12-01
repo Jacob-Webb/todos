@@ -4,6 +4,7 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { UserDataService } from '../service/data/user-data.service';
+import { StorageService } from '../service/data/storage.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   passwordResetError: boolean;
   passwordError: string;
   passwordSuccess: string;
-  user: string
+  user: string;
 
   @Input() username: string;
   invalidLogin = false
