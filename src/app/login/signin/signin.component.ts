@@ -5,6 +5,7 @@ import { SIGNIN_TOKEN } from 'src/app/app.constants';
 import { User } from 'src/app/list-users/list-users.component';
 import { Role } from 'src/app/role/role.model';
 import { RoleService } from 'src/app/role/role.service';
+import { StorageService } from 'src/app/service/data/storage.service';
 import { UserDataService } from 'src/app/service/data/user-data.service';
 import { PreloginService } from 'src/app/service/prelogin.service';
 import { BasicAuthenticationService } from '../../service/basic-authentication.service';
@@ -31,7 +32,8 @@ export class SigninComponent implements OnInit {
               private router: Router,
               private basicAuthenticationService: BasicAuthenticationService,
               private userService: UserDataService,
-              private roleService: RoleService) {
+              private roleService: RoleService,
+              private storageService: StorageService) {
     this.signinForm = fb.group({
       'email':['', Validators.required],
       'password':['', Validators.required]
@@ -69,9 +71,9 @@ export class SigninComponent implements OnInit {
     */
     this.userService.retrieveUserByEmail(this.email).subscribe(
       response => {
-        localStorage.setItem('firstName', response.firstName);
-        localStorage.setItem('lastName', response.lastName);
-        localStorage.setItem('role', this.getUserRole(response.roles, this.roleService.appRoles))
+        // localStorage.setItem('firstName', response.firstName);
+        // localStorage.setItem('lastName', response.lastName);
+        // localStorage.setItem('role', this.getUserRole(response.roles, this.roleService.appRoles))
       }
     )}
 

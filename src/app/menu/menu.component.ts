@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { StorageService } from '../service/data/storage.service';
+import { AUTHENTICATED_USER, StorageService } from '../service/data/storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -14,8 +14,7 @@ export class MenuComponent {
 
   constructor(public basicAuthenticationService: BasicAuthenticationService,
               private storageService: StorageService) {
-    this.storageService.watchUserStorage().subscribe(data => this.userName = data)
-    //this.userName = localStorage.getItem(AUTHENTICATED_USER);
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userName = data)
     //this.name = localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName');
     //this.role = localStorage.getItem('role');
   }

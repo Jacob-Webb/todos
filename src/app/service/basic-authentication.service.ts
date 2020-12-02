@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { BASE_URL } from '../app.constants';
-import { StorageService } from './data/storage.service';
+import { AUTHENTICATED_USER, StorageService, TOKEN } from './data/storage.service';
 import { Observable } from 'rxjs';
-
-export const FIRSTNAME = 'firstName'
-export const LASTNAME = 'lastName'
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +24,8 @@ export class BasicAuthenticationService {
       }).pipe(
       map(
         data => {
-          this.storageService.setAuthenticatedUser(username);
-          this.storageService.setToken(`Bearer ${data.token}`);
+          this.storageService.setStorageItem(AUTHENTICATED_USER, username);
+          this.storageService.setStorageItem(TOKEN, `Bearer ${data.token}`);
           return data;
         }
       )
@@ -36,13 +33,13 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedUser() {
-    this.storageService.watchUserStorage().subscribe(user => this.authenticatedUser = user)
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(user => this.authenticatedUser = user)
     return this.authenticatedUser;
   }
 
   getAuthenticatedToken() {
     if (this.getAuthenticatedUser()) {
-      this.storageService.watchTokenStorage().subscribe(token => this.tokenData = token);
+      this.storageService.watchStorageItem(TOKEN).subscribe(token => this.tokenData = token);
       return this.tokenData;
     }
   }

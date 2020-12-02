@@ -6,42 +6,36 @@ import { BehaviorSubject } from 'rxjs';
 
 export const TOKEN = 'authToken'
 export const AUTHENTICATED_USER = 'authenticateUser'
+export const USER_ROLE = "role"
+export const FIRST_NAME = "firstName"
+export const LAST_NAME = "lastName"
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
+  private storageSubjects = new Map([
+    [AUTHENTICATED_USER, new BehaviorSubject<string>(localStorage.getItem(AUTHENTICATED_USER))],
+    [TOKEN, new BehaviorSubject<string>(localStorage.getItem(TOKEN))],
+    [USER_ROLE, new BehaviorSubject<string>(localStorage.getItem(USER_ROLE))],
+    [FIRST_NAME, new BehaviorSubject<string>(localStorage.getItem(FIRST_NAME))],
+    [LAST_NAME, new BehaviorSubject<string>(localStorage.getItem(LAST_NAME))]
+  ]);
 
- //Create a Subject
- private tokenSubject = new BehaviorSubject<string>(localStorage.getItem(AUTHENTICATED_USER));
- private authenicatedUserSubject = new BehaviorSubject<string>(localStorage.getItem(TOKEN));
-
- watchUserStorage(): Observable<string>{
-   return this.authenicatedUserSubject.asObservable();
+ watchStorageItem(key: string): Observable<string>{
+   return this.storageSubjects.get(key).asObservable();
  }
 
- watchTokenStorage(): Observable<string> {
-   return this.tokenSubject.asObservable();
- }
-
- setAuthenticatedUser(data: any) {
-   localStorage.setItem(AUTHENTICATED_USER, data);
-   this.authenicatedUserSubject.next(data);
- }
-
- setToken(data: any) {
-   localStorage.setItem(TOKEN, data);
-   this.tokenSubject.next(data);
- }
+ setStorageItem(key: string, data: string) {
+  localStorage.setItem(key, data);
+  this.storageSubjects.get(key).next(data);
+}
 
  clearStorage() {
    localStorage.clear();
-   this.tokenSubject.next(localStorage.getItem(AUTHENTICATED_USER));
-   this.authenicatedUserSubject.next(localStorage.getItem(TOKEN));
+   this.storageSubjects.get(TOKEN).next(localStorage.getItem(TOKEN));
+   this.storageSubjects.get(AUTHENTICATED_USER).next(localStorage.getItem(AUTHENTICATED_USER));
  }
 
-
   constructor() { }
-
-
 }
