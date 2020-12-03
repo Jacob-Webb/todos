@@ -64,36 +64,6 @@ export class SigninComponent implements OnInit {
           this.submitted = true;
         }
       )
-
-    /*
-    * Once User is registered, retrieve the first and last name
-    * as well as the Role that the user is given for this app
-    */
-    // this.userService.retrieveUserByEmail(this.email).subscribe(
-    //   response => {
-    //     this.storageService.setStorageItem(FIRST_NAME, response.firstName);
-    //     this.storageService.setStorageItem(LAST_NAME, response.lastName);
-    //     this.storageService.setStorageItem(USER_ROLE, this.getUserRole(response.roles, this.roleService.appRoles));
-    //   }
-    // )
   }
-
-  /* If possible, return the user's role that matches one of the apps
-  * possible roles, otherwise return null
-  */
- /*
-  getUserRole(roles: Role[], possibleRoles: string[]): string {
-
-    //for each role of the user, check if there is a match with the possibe
-    //roles from the app.
-    var userRole: string = '';
-    possibleRoles.forEach(auth => {
-       var found = roles.find(role => role.name.valueOf() == auth.valueOf())
-       if (found != null) userRole = found.name;
-    })
-
-    return userRole;
-  }
-  */
 
 }

@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'login/:token', component: LoginComponent},
   { path: 'resetPassword', component: ResetPasswordComponent, canActivate: [PreloginGuardService]},
   { path: 'resetPassword/changePassword', component: ChangePasswordComponent, canActivate: [PreloginGuardService]},
-  // { path: 'confirmation', component: ConfirmationComponent, canActivate:[PreloginGuardService]},
+  { path: 'confirmation', component: ConfirmationComponent, canActivate:[PreloginGuardService]},
   // { path: 'welcome/:name', component: WelcomeComponent, canActivate:[RouteGuardService]},
   { path: 'todos', component: ListTodosComponent, canActivate:[RouteGuardService]},
   { path: 'todos/:id', component: TodoComponent, canActivate:[RouteGuardService]},

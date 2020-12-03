@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../list-users/list-users.component';
+import { Role } from '../role/role.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
     /* If possible, return the user's role that matches one of the apps
   * possible roles, otherwise return null
   */
- /*
+
   getUserRole(roles: Role[], possibleRoles: string[]): string {
 
     //for each role of the user, check if there is a match with the possibe
@@ -25,5 +26,4 @@ export class UserService {
 
     return userRole;
   }
-  */
 }
