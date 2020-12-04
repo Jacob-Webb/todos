@@ -18,8 +18,6 @@ export class MenuComponent {
     this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userName = data);
     this.storageService.watchStorageItem(FIRST_NAME).subscribe(data => this.name = data);
     this.storageService.watchStorageItem(USER_ROLE).subscribe(data => this.role = data);
-    //this.name = localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName');
-    //this.role = localStorage.getItem('role');
   }
 
   ngOnInit(): void {}

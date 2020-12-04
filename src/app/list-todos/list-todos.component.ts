@@ -41,15 +41,6 @@ export class ListTodosComponent implements OnInit {
   ngOnInit(): void {
     this.refreshTodos();
     this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userEmail = data);
-
-    // On loading the todoList, retrieve user information
-    this.userDataService.retrieveUserByEmail(this.userEmail).subscribe(
-      response => {
-        this.storageService.setStorageItem(FIRST_NAME, response.firstName);
-        this.storageService.setStorageItem(LAST_NAME, response.lastName);
-        this.storageService.setStorageItem(USER_ROLE, this.userService.getUserRole(response.roles, this.roleService.appRoles));
-      }
-    )
   }
 
   refreshTodos() {

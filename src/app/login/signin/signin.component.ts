@@ -9,6 +9,9 @@ import { FIRST_NAME, LAST_NAME, StorageService, USER_ROLE } from 'src/app/servic
 import { UserDataService } from 'src/app/service/data/user-data.service';
 import { PreloginService } from 'src/app/service/prelogin.service';
 import { BasicAuthenticationService } from '../../service/basic-authentication.service';
+import { concat } from 'rxjs';
+import { UserService } from 'src/app/service/user.service';
+import { concatMap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -31,7 +34,8 @@ export class SigninComponent implements OnInit {
               fb: FormBuilder,
               private router: Router,
               private basicAuthenticationService: BasicAuthenticationService,
-              private userService: UserDataService,
+              private userDataService: UserDataService,
+              private userService: UserService,
               private roleService: RoleService,
               private storageService: StorageService) {
     this.signinForm = fb.group({
@@ -52,18 +56,22 @@ export class SigninComponent implements OnInit {
   onSubmit(): any {
     this.email = this.signinForm.controls['email'].value;
     this.password = this.signinForm.controls['password'].value;
-    this.basicAuthenticationService.executeJWTAuthenticationService(this.email, this.password)
-      .subscribe(
-        data => {
-          //this.router.navigate(['welcome', this.email])
-          this.router.navigate(['todos']);
-          this.invalidLogin = false;
-        },
-        error => {
-          this.invalidLogin = true;
-          this.submitted = true;
-        }
-      )
+    this.basicAuthenticationService.executeJWTAuthenticationService(this.email, this.password).pipe(
+      concatMap(data => this.userDataService.retrieveUserByEmail(this.email))
+    ).subscribe(
+      response => {
+        console.log(response);
+        this.storageService.setStorageItem(FIRST_NAME, response.firstName);
+        this.storageService.setStorageItem(LAST_NAME, response.lastName);
+        this.storageService.setStorageItem(USER_ROLE, this.userService.getUserRole(response.roles, this.roleService.appRoles));
+        this.router.navigate(['todos']);
+        this.invalidLogin = false;
+      },
+      error => {
+        this.invalidLogin = true;
+        this.submitted = true;
+      }
+    )
   }
 
 }
