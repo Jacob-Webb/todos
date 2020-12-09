@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Todo } from '../list-todos/list-todos.component';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { AUTHENTICATED_USER, StorageService } from '../service/data/storage.service';
 import { TodoDataService } from '../service/data/todo-data.service';
 
@@ -18,7 +20,9 @@ export class HomeComponent implements OnInit {
 
   todoList: Todo[];
 
-  constructor(private todoDataService: TodoDataService,
+  constructor(private router: Router,
+              private basicAuthenticationService: BasicAuthenticationService,
+              private todoDataService: TodoDataService,
               private storageService: StorageService) { }
 
   ngOnInit(): void {
@@ -32,6 +36,26 @@ export class HomeComponent implements OnInit {
       this.todoList = list
     });
 
+  }
+
+  updateTodo(id) {
+    console.log(`update todo ${id}`)
+    this.router.navigate(['todos', id])
+
+  }
+
+  deleteTodo(id) {
+    this.todoDataService.deleteTodo(id, this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
+      response => {
+        this.message = `Delete of Todo ${id} Succesful`
+        //this.refreshTodos();
+      }
+    );
+
+  }
+
+  createTodo(){
+    this.router.navigate(['todos',-1]);
   }
 
 
