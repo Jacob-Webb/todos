@@ -60,11 +60,10 @@ export class SigninComponent implements OnInit {
       concatMap(data => this.userDataService.retrieveUserByEmail(this.email))
     ).subscribe(
       response => {
-        console.log(response);
         this.storageService.setStorageItem(FIRST_NAME, response.firstName);
         this.storageService.setStorageItem(LAST_NAME, response.lastName);
         this.storageService.setStorageItem(USER_ROLE, this.userService.getUserRole(response.roles, this.roleService.appRoles));
-        this.router.navigate(['todos']);
+        this.router.navigate(['home']);
         this.invalidLogin = false;
       },
       error => {

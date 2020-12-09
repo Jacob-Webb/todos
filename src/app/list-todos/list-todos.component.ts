@@ -6,6 +6,7 @@ import { UserService } from '../service/user.service';
 import { UserDataService } from '../service/data/user-data.service';
 import { AUTHENTICATED_USER, FIRST_NAME, LAST_NAME, StorageService, USER_ROLE } from '../service/data/storage.service';
 import { RoleService } from '../role/role.service';
+import { Observable } from 'rxjs';
 
 export class Todo {
   constructor(
@@ -24,7 +25,8 @@ export class Todo {
 })
 export class ListTodosComponent implements OnInit {
 
-  todos: Todo[];
+  todoList$: Observable<Todo[]>;
+  todoList: Todo[];
   message: string;
   userEmail: string;
 
@@ -39,10 +41,14 @@ export class ListTodosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.refreshTodos();
-    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userEmail = data);
+    //this.refreshTodos();
+    //this.todoList$ = this.todoService.retrieveAllTodos(this.basicAuthenticationService.getAuthenticatedUser());
+    //this.todoList$.subscribe(response => this.todoList = response);
+    // console.log(this.todoList);
+    // this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userEmail = data);
   }
 
+  /*
   refreshTodos() {
     this.todoService.retrieveAllTodos(this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
       response => {
@@ -50,6 +56,7 @@ export class ListTodosComponent implements OnInit {
       }
     )
   }
+  */
 
   updateTodo(id) {
     console.log(`update todo ${id}`)
@@ -61,7 +68,7 @@ export class ListTodosComponent implements OnInit {
     this.todoService.deleteTodo(id, this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
       response => {
         this.message = `Delete of Todo ${id} Succesful`
-        this.refreshTodos();
+        //this.refreshTodos();
       }
     );
 

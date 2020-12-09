@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { ListTodosComponent } from './list-todos/list-todos.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -14,6 +13,7 @@ import { ChangePasswordComponent } from './reset-password/change-password/change
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserPasswordComponent } from './user-password/user-password.component';
 import { PreloginGuardService } from './service/prelogin-guard.service';
+import { HomeComponent } from './home/home.component';
 
 // welcome
 const routes: Routes = [
@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'resetPassword', component: ResetPasswordComponent, canActivate: [PreloginGuardService]},
   { path: 'resetPassword/changePassword', component: ChangePasswordComponent, canActivate: [PreloginGuardService]},
   { path: 'confirmation', component: ConfirmationComponent, canActivate:[PreloginGuardService]},
-  // { path: 'welcome/:name', component: WelcomeComponent, canActivate:[RouteGuardService]},
+  { path: 'home', component: HomeComponent, canActivate:[RouteGuardService]},
   { path: 'todos', component: ListTodosComponent, canActivate:[RouteGuardService]},
   { path: 'todos/:id', component: TodoComponent, canActivate:[RouteGuardService]},
   { path: 'account', component: UserAccountComponent, canActivate: [RouteGuardService]},
