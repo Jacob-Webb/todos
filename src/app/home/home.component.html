@@ -1,1 +1,46 @@
-<p>home works!</p>
+<div class="container">
+
+    <div *ngIf="">
+      <p>Looks like you don't have any upcoming tasks!</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="createTodo()" class="btn btn-primary">Add Todo</button>
+
+    <div *ngFor="let todo of todoList" class="card-container">
+      <mat-card *ngIf="!todo.done">
+        <mat-card-title>{{todo.title}}</mat-card-title>
+        <mat-card-content>
+          Description:
+          <br>
+          {{todo.description}}
+          <br>
+          Due date:
+          <br>
+          {{todo.targetDate | date:'shortDate':'UTC' | uppercase}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="updateTodo(todo.id)" class="btn btn-success">Update</button>
+          <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  <br>
+  <div *ngFor="let todo of todoList" class="card-container">
+    <mat-card *ngIf="todo.done">
+      <mat-card-title>{{todo.title}} <span style="font-size:.8em">(completed)</span></mat-card-title>
+      <mat-card-content>
+        Description:
+        <br>
+        {{todo.description}}
+        <br>
+        Due date:
+        <br>
+        {{todo.targetDate | date:'shortDate':'UTC' | uppercase}}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="updateTodo(todo.id)" class="btn btn-success">Update</button>
+        <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  </div>
