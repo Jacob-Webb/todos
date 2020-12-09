@@ -22,6 +22,7 @@ export class TodoComponent implements OnInit {
     private todoService: TodoDataService,
     private route: ActivatedRoute,
     private router: Router,
+    private todoDataService: TodoDataService,
     private basicAuthenticationService: BasicAuthenticationService,
     fb: FormBuilder
   ) {
@@ -35,11 +36,13 @@ export class TodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    this.todo = new Todo(this.id, '', '', false, new Date())
+    //this.todo = new Todo(this.id, '', '', false, new Date())
     this.createTodo = true;
 
     if (this.id != -1) {
       this.createTodo = false;
+      this.todo = this.todoDataService.getTodo(this.id)
+      /*
       this.todoService.retrieveTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser())
       .subscribe (
         data => {
@@ -50,6 +53,7 @@ export class TodoComponent implements OnInit {
           this.todoForm.controls['done'].setValue(this.todo.done);
         }
       )
+      */
     }
   }
 
