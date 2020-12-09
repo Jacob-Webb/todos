@@ -7,14 +7,16 @@ import { TodoDataService } from '../service/data/todo-data.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
   userEmail: string;
-
+  todos$: Observable<Todo[]>
   todosNotDone$: Observable<Todo[]>;
   todosDone$: Observable<Todo[]>;
+
+  todoList: Todo[];
 
   constructor(private todoDataService: TodoDataService,
               private storageService: StorageService) { }
@@ -25,7 +27,11 @@ export class HomeComponent implements OnInit {
 
     this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userEmail = data);
 
-    const todos$ = this.todoDataService.retrieveAllTodos(this.userEmail);
+    this.todos$ = this.todoDataService.retrieveAllTodos(this.userEmail);
+    this.todos$.subscribe(data => {
+      this.todoList = data
+    });
+
   }
 
 
