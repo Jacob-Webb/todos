@@ -39,15 +39,13 @@ export class HomeComponent implements OnInit {
   }
 
   updateTodo(id) {
-    console.log(`update todo ${id}`)
-    this.router.navigate(['todos', id])
-
+    this.router.navigate(['todo', id])
   }
 
   deleteTodo(id) {
     this.todoDataService.deleteTodo(id, this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
       response => {
-        this.message = `Delete of Todo ${id} Succesful`
+        //this.message = `Delete of Todo ${id} Succesful`
         //this.refreshTodos();
       }
     );
@@ -55,7 +53,7 @@ export class HomeComponent implements OnInit {
   }
 
   createTodo(){
-    this.router.navigate(['todos',-1]);
+    this.router.navigate(['todo',-1]);
   }
 
 

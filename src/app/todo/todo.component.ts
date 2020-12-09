@@ -65,7 +65,7 @@ export class TodoComponent implements OnInit {
 
         }
       )
-      this.router.navigate(['todos']);
+      this.router.navigate(['home']);
     } else {
       this.todo.done = this.todoForm.controls['done'].value;
       this.todoService.updateTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser(), this.todo).subscribe(
@@ -73,7 +73,7 @@ export class TodoComponent implements OnInit {
         }
       ),
       this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['todos']);
+        this.router.navigate(['home']);
       });
     }
 
