@@ -11,7 +11,8 @@ import { PreloginService } from 'src/app/service/prelogin.service';
 import { BasicAuthenticationService } from '../../service/basic-authentication.service';
 import { concat } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, map } from 'rxjs/operators';
+import { TodoDataService } from 'src/app/service/data/todo-data.service';
 
 
 @Injectable({
@@ -29,12 +30,14 @@ export class SigninComponent implements OnInit {
   hide=true;
   invalidLogin = false;
   submitted=false;
+  user: User;
 
   constructor(private preLoginService: PreloginService,
               fb: FormBuilder,
               private router: Router,
               private basicAuthenticationService: BasicAuthenticationService,
               private userDataService: UserDataService,
+              private todoDataService: TodoDataService,
               private userService: UserService,
               private roleService: RoleService,
               private storageService: StorageService) {
@@ -56,13 +59,20 @@ export class SigninComponent implements OnInit {
   onSubmit(): any {
     this.email = this.signinForm.controls['email'].value;
     this.password = this.signinForm.controls['password'].value;
+
+    // On sign in, verify user, get user info, retrieve user todolist
     this.basicAuthenticationService.executeJWTAuthenticationService(this.email, this.password).pipe(
-      concatMap(data => this.userDataService.retrieveUserByEmail(this.email))
+      concatMap(data =>
+        this.userDataService.retrieveUserByEmail(this.email).pipe(
+          map(response => this.user = response)
+        )
+      ),
+      concatMap(data => this.todoDataService.retrieveAllTodos(this.email))
     ).subscribe(
       response => {
-        this.storageService.setStorageItem(FIRST_NAME, response.firstName);
-        this.storageService.setStorageItem(LAST_NAME, response.lastName);
-        this.storageService.setStorageItem(USER_ROLE, this.userService.getUserRole(response.roles, this.roleService.appRoles));
+        this.storageService.setStorageItem(FIRST_NAME, this.user.firstName);
+        this.storageService.setStorageItem(LAST_NAME, this.user.lastName);
+        this.storageService.setStorageItem(USER_ROLE, this.userService.getUserRole(this.user.roles, this.roleService.appRoles));
         this.router.navigate(['home']);
         this.invalidLogin = false;
       },

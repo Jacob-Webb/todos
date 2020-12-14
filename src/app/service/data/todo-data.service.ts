@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Todo } from '../../list-todos/list-todos.component';
 import { API_URL } from 'src/app/app.constants';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AUTHENTICATED_USER, StorageService } from './storage.service';
 
 
 @Injectable({
@@ -10,11 +11,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class TodoDataService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private storageService: StorageService) { }
 
-  /*******************
-  * Create Todo List
-  *******************/
  private todoSubject = new BehaviorSubject<Todo[]>([]);
 
  todos$: Observable<Todo[]> = this.todoSubject.asObservable();
@@ -52,8 +51,20 @@ export class TodoDataService {
     return this.http.put(`${API_URL}/todos/${todoId}/${email}`, todo);
   }
 
-  createTodo(email, todo) {
-    return this.http.post(`${API_URL}/todos/${email}`, todo);
+  createTodo(email, todo): void {
+    //return this.http.post(`${API_URL}/todos/${email}`, todo);
+    /*
+    * Add the todo to the array of todos in storage
+    * Update the value for the array in storage
+    * Send the new array to the backend
+    */
+    //Right now this doesn't take into account that the id won't auto increment to what's in there.
+    var todoList = this.todoSubject.getValue();
+    todoList.push(todo);
+
+    this.todoSubject.next(todoList);
+
+    this.http.post(`${API_URL}/todos/${email}`, todo);
   }
 
 }
