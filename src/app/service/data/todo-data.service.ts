@@ -25,11 +25,15 @@ export class TodoDataService {
  /*
  *  I think that I can move the API call to retrieve on initialization... we'll figure that out.
  */
-  retrieveAllTodos(email) {
+  getTodoData(email) {
     this.http.get<Todo[]>(`${API_URL}/todos/${email}`)
     .subscribe(todos => {
                 this.todoSubject.next(todos);
     });
+    return this.todos$;
+  }
+
+  getTodoStorage() {
     return this.todos$;
   }
 
@@ -64,7 +68,7 @@ export class TodoDataService {
 
     this.todoSubject.next(todoList);
 
-    this.http.post(`${API_URL}/todos/${email}`, todo);
+    this.http.post(`${API_URL}/todos/${email}`, todo).subscribe(data=> console.log(data));
   }
 
 }

@@ -64,7 +64,7 @@ export class TodoComponent implements OnInit {
     if (this.id == -1) {
       // Create Todo
       this.todo.done = false;
-      //this.todoService.createTodo(this.userEmail, this.todo).subscribe();
+      this.todoService.createTodo(this.userEmail, this.todo);
       this.router.navigate(['home']);
     } else {
       this.todo.done = this.todoForm.controls['done'].value;

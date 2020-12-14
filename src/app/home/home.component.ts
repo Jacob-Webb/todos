@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
 
     this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userEmail = data);
 
-    this.todoList$ = this.todoDataService.retrieveAllTodos(this.userEmail);
+    this.todoList$ = this.todoDataService.getTodoStorage();
     this.todoList$.subscribe(list => {
       this.todoList = list
     });

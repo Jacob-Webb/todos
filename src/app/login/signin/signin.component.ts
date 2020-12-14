@@ -67,7 +67,7 @@ export class SigninComponent implements OnInit {
           map(response => this.user = response)
         )
       ),
-      concatMap(data => this.todoDataService.retrieveAllTodos(this.email))
+      concatMap(data => this.todoDataService.getTodoData(this.email))
     ).subscribe(
       response => {
         this.storageService.setStorageItem(FIRST_NAME, this.user.firstName);
