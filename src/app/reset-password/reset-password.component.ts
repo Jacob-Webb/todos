@@ -40,7 +40,6 @@ export class ResetPasswordComponent implements OnInit {
     this.email = this.recoverForm.controls['email'].value;
     this.userService.resetPassword(this.email).subscribe(
       data => {
-        console.log(data);
       }
     )
   }

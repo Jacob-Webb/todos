@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'login/:token', component: LoginComponent},
   { path: 'resetPassword', component: ResetPasswordComponent, canActivate: [PreloginGuardService]},
-  { path: 'resetPassword/changePassword', component: ChangePasswordComponent, canActivate: [PreloginGuardService]},
+  { path: 'resetPassword/changePassword', component: ChangePasswordComponent},
   { path: 'confirmation', component: ConfirmationComponent, canActivate:[PreloginGuardService]},
   // { path: 'welcome/:name', component: WelcomeComponent, canActivate:[RouteGuardService]},
   { path: 'todos', component: ListTodosComponent, canActivate:[RouteGuardService]},

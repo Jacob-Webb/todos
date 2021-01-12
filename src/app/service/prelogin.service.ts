@@ -7,6 +7,7 @@ import { SIGNIN_TOKEN } from '../app.constants'
 export class PreloginService {
   receivedToken: string;
   confirmationToken: string;
+  changePasswordToken: string;
 
   constructor() { }
 }

@@ -19,7 +19,6 @@ import { UserDataService } from '../../service/data/user-data.service';
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent implements OnInit {
-  token: string;
   changePasswordForm: FormGroup;
   hide=true;
   hideConfirm=true;
@@ -42,7 +41,7 @@ export class ChangePasswordComponent implements OnInit {
           validator: this.passwordMatchValidator
      }),
       this.route.queryParams.subscribe(params => {
-        this.token = params['token'];
+        this.preLoginService.changePasswordToken = params['token'];
       });
    }
 
@@ -50,8 +49,8 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit(): void {
     /* if this token is not valid, redirect to login page. */
       //confirm token
-    if (this.token != null) {
-      this.userService.confirmResetPasswordToken(this.token).pipe(
+    if (this.preLoginService.changePasswordToken != null) {
+      this.userService.confirmResetPasswordToken(this.preLoginService.changePasswordToken).pipe(
         catchError((error)=>{
           if (error.status === 500) {
             console.log("There was an unexpected error");
@@ -64,13 +63,13 @@ export class ChangePasswordComponent implements OnInit {
         }
       )).subscribe()
     }
-    this.preLoginService.confirmationToken = this.token;
+    this.preLoginService.confirmationToken = this.preLoginService.changePasswordToken;
   }
 
   onSubmit() {
     //pass the token back along with the password to be saved to the backend
     this.password = this.changePasswordForm.controls['password'].value;
-    this.userService.savePasswordReset(this.token, this.password).pipe(
+    this.userService.savePasswordReset(this.preLoginService.changePasswordToken, this.password).pipe(
       catchError((error) => {
         if (error.status === 500) {
           console.log("There was an unexpected error");
