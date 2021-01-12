@@ -3,13 +3,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { SIGNIN_TOKEN } from 'src/app/app.constants';
 import { User } from 'src/app/list-users/list-users.component';
-import { Role } from 'src/app/role/role.model';
 import { RoleService } from 'src/app/role/role.service';
 import { FIRST_NAME, LAST_NAME, StorageService, USER_ROLE } from 'src/app/service/data/storage.service';
 import { UserDataService } from 'src/app/service/data/user-data.service';
 import { PreloginService } from 'src/app/service/prelogin.service';
 import { BasicAuthenticationService } from '../../service/basic-authentication.service';
-import { concat } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 import { concatMap, map } from 'rxjs/operators';
 import { TodoDataService } from 'src/app/service/data/todo-data.service';
@@ -60,7 +58,7 @@ export class SigninComponent implements OnInit {
     this.email = this.signinForm.controls['email'].value;
     this.password = this.signinForm.controls['password'].value;
 
-    // On sign in, verify user, get user info, retrieve user todolist
+    // Verify user and add all user info (user name, todos, etc) to storage when signing in. 
     this.basicAuthenticationService.executeJWTAuthenticationService(this.email, this.password).pipe(
       concatMap(data =>
         this.userDataService.retrieveUserByEmail(this.email).pipe(

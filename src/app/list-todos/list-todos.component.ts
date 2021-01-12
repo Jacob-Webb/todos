@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { UserService } from '../service/user.service';
-import { UserDataService } from '../service/data/user-data.service';
-import { AUTHENTICATED_USER, StorageService} from '../service/data/storage.service';
-import { RoleService } from '../role/role.service';
 import { Observable } from 'rxjs';
 
 export class Todo {
@@ -33,11 +29,7 @@ export class ListTodosComponent implements OnInit {
   constructor(
     private todoService: TodoDataService,
     private router: Router,
-    private basicAuthenticationService: BasicAuthenticationService,
-    private userDataService: UserDataService,
-    private userService: UserService,
-    private storageService: StorageService,
-    private roleService: RoleService
+    private basicAuthenticationService: BasicAuthenticationService
   ) { }
 
   ngOnInit(): void {
