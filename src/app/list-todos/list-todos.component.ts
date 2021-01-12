@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { UserService } from '../service/user.service';
 import { UserDataService } from '../service/data/user-data.service';
-import { AUTHENTICATED_USER, FIRST_NAME, LAST_NAME, StorageService, USER_ROLE } from '../service/data/storage.service';
+import { AUTHENTICATED_USER, StorageService} from '../service/data/storage.service';
 import { RoleService } from '../role/role.service';
 
 export class Todo {
@@ -52,7 +52,6 @@ export class ListTodosComponent implements OnInit {
   }
 
   updateTodo(id) {
-    console.log(`update todo ${id}`)
     this.router.navigate(['todos', id])
 
   }
