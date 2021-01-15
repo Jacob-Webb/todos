@@ -4,6 +4,7 @@ import { Todo } from '../../list-todos/list-todos.component';
 import { API_URL } from 'src/app/app.constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AUTHENTICATED_USER, StorageService, TODO_LIST } from './storage.service';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({
@@ -34,7 +35,8 @@ export class TodoDataService {
   }
 
   getTodoStorage() {
-    this.storageService.watchStorageItem(TODO_LIST).subscribe(data => this.todoSubject.next(JSON.parse(data)));
+    this.storageService.watchStorageItem(TODO_LIST).subscribe(data => {this.todoSubject.next(JSON.parse(data))
+    console.log(JSON.parse(data))});
     return this.todos$;
   }
 
@@ -57,19 +59,28 @@ export class TodoDataService {
   }
 
   createTodo(email, todo): void {
-    //return this.http.post(`${API_URL}/todos/${email}`, todo);
     /*
-    * Add the todo to the array of todos in storage
-    * Update the value for the array in storage
-    * Send the new array to the backend
+      save to database
+      get id from database
+      set todo id
+      save to storage
+      return home
     */
-    //Right now this doesn't take into account that the id won't auto increment to what's in there.
-    var todoList = this.todoSubject.getValue();
-    todoList.push(todo);
+    // var todoList = this.todoSubject.getValue();
+    // todoList.push(todo);
 
-    this.todoSubject.next(todoList);
+    // this.todoSubject.next(todoList);
 
-    this.http.post(`${API_URL}/todos/${email}`, todo).subscribe(data=> console.log(data));
+    var id;
+    this.http.post(`${API_URL}/todos/${email}`, todo).pipe(
+      map(data => {
+        id = data;
+        todo.id = id;
+        var todoList = this.todoSubject.getValue();
+        todoList.push(todo);
+        this.storageService.setStorageItem(TODO_LIST, todoList);
+      })
+    ).subscribe();
   }
 
 }
