@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Todo } from '../../list-todos/list-todos.component';
 import { API_URL } from 'src/app/app.constants';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AUTHENTICATED_USER, StorageService } from './storage.service';
+import { AUTHENTICATED_USER, StorageService, TODO_LIST } from './storage.service';
 
 
 @Injectable({
@@ -34,6 +34,7 @@ export class TodoDataService {
   }
 
   getTodoStorage() {
+    this.storageService.watchStorageItem(TODO_LIST).subscribe(data => this.todoSubject.next(JSON.parse(data)));
     return this.todos$;
   }
 

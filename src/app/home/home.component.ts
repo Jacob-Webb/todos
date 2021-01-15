@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Todo } from '../list-todos/list-todos.component';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { AUTHENTICATED_USER, StorageService } from '../service/data/storage.service';
+import { AUTHENTICATED_USER, StorageService, TODO_LIST } from '../service/data/storage.service';
 import { TodoDataService } from '../service/data/todo-data.service';
 
 @Component({
@@ -31,9 +31,7 @@ export class HomeComponent implements OnInit {
     this.todoList$ = this.todoDataService.getTodoStorage();
     this.todoList$.subscribe(list => {
       this.todoList = list;
-      console.log(this.todoList);
     });
-
   }
 
   updateTodo(id) {
