@@ -21,7 +21,6 @@ export class TodoComponent implements OnInit {
   userEmail: string;
 
   constructor(
-    private todoService: TodoDataService,
     private route: ActivatedRoute,
     private router: Router,
     private todoDataService: TodoDataService,
@@ -64,11 +63,11 @@ export class TodoComponent implements OnInit {
     if (this.id == -1) {
       // Create Todo
       this.todo.done = false;
-      this.todoService.createTodo(this.userEmail, this.todo);
+      this.todoDataService.createTodo(this.userEmail, this.todo);
       this.router.navigate(['home']);
     } else {
       this.todo.done = this.todoForm.controls['done'].value;
-      this.todoService.updateTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser(), this.todo).subscribe(
+      this.todoDataService.updateTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser(), this.todo).subscribe(
         data => {
         }
       ),

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { SIGNIN_TOKEN } from 'src/app/app.constants';
 import { User } from 'src/app/list-users/list-users.component';
 import { RoleService } from 'src/app/role/role.service';
-import { FIRST_NAME, LAST_NAME, StorageService, USER_ROLE } from 'src/app/service/data/storage.service';
+import { FIRST_NAME, LAST_NAME, StorageService, TODO_LIST, USER_ROLE } from 'src/app/service/data/storage.service';
 import { UserDataService } from 'src/app/service/data/user-data.service';
 import { PreloginService } from 'src/app/service/prelogin.service';
 import { BasicAuthenticationService } from '../../service/basic-authentication.service';
@@ -65,7 +65,9 @@ export class SigninComponent implements OnInit {
           map(response => this.user = response)
         )
       ),
-      concatMap(data => this.todoDataService.getTodoData(this.email))
+      concatMap(data => this.todoDataService.getTodoData(this.email).pipe(
+        map(response => this.storageService.setStorageItem(TODO_LIST, response))
+      ))
     ).subscribe(
       response => {
         this.storageService.setStorageItem(FIRST_NAME, this.user.firstName);

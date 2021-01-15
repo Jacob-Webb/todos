@@ -9,7 +9,8 @@
       <mat-card *ngIf="!todo.done">
         <mat-card-title>{{todo.title}}</mat-card-title>
         <mat-card-content>
-          Description:
+          todo id: {{ todo.id }}
+          Description: 
           <br>
           {{todo.description}}
           <br>
@@ -28,7 +29,7 @@
     <mat-card *ngIf="todo.done">
       <mat-card-title>{{todo.title}} <span style="font-size:.8em">(completed)</span></mat-card-title>
       <mat-card-content>
-        Description:
+        
         <br>
         {{todo.description}}
         <br>
