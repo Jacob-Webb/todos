@@ -43,12 +43,11 @@ export class TodoDataService {
     return this.http.delete(`${API_URL}/todos/${todoId}/${email}`)
   }
 
-  // retrieveTodo(todoId, email) {
-    getTodo(todoId) {
+  getTodo(todoId) {
     this.todos$.pipe(
-     map(todoList => {
-       this.todo = todoList.find(todo => todo.id == todoId);
-     })
+      map(todoList => {
+        this.todo = todoList.find(todo => todo.id == todoId);
+      })
     ).subscribe();
 
     return this.todo;
