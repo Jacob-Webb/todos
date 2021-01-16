@@ -52,10 +52,4 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['todo',-1]);
   }
 
-
-  /*
-  * Home should:
-  * List Todos
-  */
-
 }

@@ -35,8 +35,7 @@ export class TodoDataService {
   }
 
   getTodoStorage() {
-    this.storageService.watchStorageItem(TODO_LIST).subscribe(data => {this.todoSubject.next(JSON.parse(data))
-    console.log(JSON.parse(data))});
+    this.storageService.watchStorageItem(TODO_LIST).subscribe(data => {this.todoSubject.next(JSON.parse(data))});
     return this.todos$;
   }
 
@@ -46,11 +45,12 @@ export class TodoDataService {
 
   // retrieveTodo(todoId, email) {
     getTodo(todoId) {
-    this.todos$.subscribe(data => {
-      this.todo = data.find(obj => {
-        return obj.id=todoId;
-      });
-    })
+    this.todos$.pipe(
+     map(todoList => {
+       this.todo = todoList.find(todo => todo.id == todoId);
+     })
+    ).subscribe();
+
     return this.todo;
   }
 
@@ -66,11 +66,6 @@ export class TodoDataService {
       save to storage
       return home
     */
-    // var todoList = this.todoSubject.getValue();
-    // todoList.push(todo);
-
-    // this.todoSubject.next(todoList);
-
     var id;
     this.http.post(`${API_URL}/todos/${email}`, todo).pipe(
       map(data => {
