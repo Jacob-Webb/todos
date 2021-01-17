@@ -33,13 +33,13 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedUser() {
-    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(user => this.authenticatedUser = user)
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(user => this.authenticatedUser = JSON.parse(user))
     return this.authenticatedUser;
   }
 
   getAuthenticatedToken() {
     if (this.getAuthenticatedUser()) {
-      this.storageService.watchStorageItem(TOKEN).subscribe(token => this.tokenData = token);
+      this.storageService.watchStorageItem(TOKEN).subscribe(token => this.tokenData = JSON.parse(token));
       return this.tokenData;
     }
   }
