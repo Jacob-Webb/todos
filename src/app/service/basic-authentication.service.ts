@@ -49,6 +49,7 @@ export class BasicAuthenticationService {
   }
 
   logout() {
+    console.log(this.tokenData);
     this.storageService.clearStorage();
   }
 

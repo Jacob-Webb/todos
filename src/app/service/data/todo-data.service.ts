@@ -19,13 +19,12 @@ export class TodoDataService {
 
  todos$: Observable<Todo[]> = this.todoSubject.asObservable();
  todo: Todo;
+ userEmail: string;
 
   /******************
   * Http Calls
   *******************/
- /*
- *  I think that I can move the API call to retrieve on initialization... we'll figure that out.
- */
+
   getTodoData(email) {
     this.http.get<Todo[]>(`${API_URL}/todos/${email}`)
     .subscribe(todos => {
@@ -53,8 +52,23 @@ export class TodoDataService {
     return this.todo;
   }
 
-  updateTodo(todoId, email, todo) {
-    return this.http.put(`${API_URL}/todos/${todoId}/${email}`, todo);
+  updateTodo(todo) {
+    /*
+      get the users email 
+      send updated todo to the backend
+      replace todo in storage's todoList
+      write over todoList in storage
+    */
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(email => this.userEmail = email)
+    //this.http.put(`${API_URL}/todos/${todo.id}/${this.userEmail}`, todo).subscribe();
+    this.http.put(`${API_URL}/todos/${todo.id}/${this.userEmail}`, todo).subscribe();
+    this.todos$.pipe(
+      map(todoList => {
+        var index = todoList.findIndex(searchTodo => searchTodo.id == todo.id);
+        todoList[index] = todo;
+        this.storageService.setStorageItem(TODO_LIST, todoList);
+      })
+    ).subscribe();
   }
 
   createTodo(email, todo): void {

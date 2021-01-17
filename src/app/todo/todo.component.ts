@@ -66,14 +66,23 @@ export class TodoComponent implements OnInit {
       this.todoDataService.createTodo(this.userEmail, this.todo);
       this.router.navigate(['home']);
     } else {
+      // Update Todo
+      /*
+        Set the "done" value for updated todos
+        update the todo
+        navigate home
+      */
       this.todo.done = this.todoForm.controls['done'].value;
-      this.todoDataService.updateTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser(), this.todo).subscribe(
-        data => {
-        }
-      ),
-      this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['home']);
-      });
+      this.todoDataService.updateTodo(this.todo);
+      this.router.navigate(['home']);
+      
+      // this.todoDataService.updateTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser(), this.todo).subscribe(
+      //   data => {
+      //   }
+      // ),
+      // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
+      //   this.router.navigate(['home']);
+      // });
     }
 
   }

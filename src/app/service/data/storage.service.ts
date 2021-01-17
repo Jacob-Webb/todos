@@ -28,8 +28,11 @@ export class StorageService {
    return this.storageSubjects.get(key).asObservable();
  }
 
- setStorageItem(key: string, data: any) {
+ getStorageItem(key: string) {
+   return localStorage.getItem(key);
+ }
 
+ setStorageItem(key: string, data: any) {
   localStorage.setItem(key, JSON.stringify(data))
   this.storageSubjects.get(key).next(data);
 }
