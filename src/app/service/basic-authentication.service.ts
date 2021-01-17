@@ -33,13 +33,13 @@ export class BasicAuthenticationService {
   }
 
   getAuthenticatedUser() {
-    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(user => this.authenticatedUser = JSON.parse(user))
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(user => this.authenticatedUser = user)
     return this.authenticatedUser;
   }
 
   getAuthenticatedToken() {
     if (this.getAuthenticatedUser()) {
-      this.storageService.watchStorageItem(TOKEN).subscribe(token => this.tokenData = JSON.parse(token));
+      this.storageService.watchStorageItem(TOKEN).subscribe(token => this.tokenData = token);
       return this.tokenData;
     }
   }
@@ -49,7 +49,6 @@ export class BasicAuthenticationService {
   }
 
   logout() {
-    console.log(this.tokenData);
     this.storageService.clearStorage();
   }
 

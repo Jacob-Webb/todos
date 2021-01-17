@@ -15,10 +15,9 @@ export class MenuComponent {
 
   constructor(public basicAuthenticationService: BasicAuthenticationService,
               private storageService: StorageService) {
-    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userName = JSON.parse(data));
-    this.storageService.watchStorageItem(FIRST_NAME).subscribe(data => this.name = JSON.parse(data));
-    this.storageService.watchStorageItem(USER_ROLE).subscribe(data => this.role = JSON.parse(data));
-    console.log(this.role);
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(data => this.userName = data);
+    this.storageService.watchStorageItem(FIRST_NAME).subscribe(data => this.name = data);
+    this.storageService.watchStorageItem(USER_ROLE).subscribe(data => this.role = data);
   }
 
   ngOnInit(): void {}

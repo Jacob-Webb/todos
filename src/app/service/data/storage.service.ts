@@ -29,7 +29,10 @@ export class StorageService {
  }
 
  setStorageItem(key: string, data: any) {
-  localStorage.setItem(key, JSON.stringify(data))
+   if (key == TODO_LIST) {
+     localStorage.setItem(key, JSON.stringify(data))
+   } else { localStorage.setItem(key, data) }
+  
   this.storageSubjects.get(key).next(data);
 }
 

@@ -24,7 +24,6 @@ export class ConfirmationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
     this.route.queryParams.subscribe(params=> {
       let idParam = params['a'];
       this.userEmail = atob(decodeURIComponent(idParam));
