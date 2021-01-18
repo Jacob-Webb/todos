@@ -45,16 +45,10 @@ export class HomeComponent implements OnInit {
       remove todo from todoList
       Update todoList in storage
     */
-   //this.todoDataService.deleteTodo(id).subscribe();
-   var todo = this.todoList.find(element => element.id == id)
-   console.log(todo);
-
-    // this.todoDataService.deleteTodo(id, this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
-    //   response => {
-    //     //this.message = `Delete of Todo ${id} Succesful`
-    //     //this.refreshTodos();
-    //   }
-    // );
+   this.todoDataService.deleteTodo(id).subscribe();
+   var index = this.todoList.findIndex(element => element.id == id)
+   this.todoList.splice(index, 1);
+   this.storageService.setStorageItem(TODO_LIST, this.todoList);
 
   }
 
