@@ -16,12 +16,12 @@ export const TODO_LIST = "todoList"
 })
 export class StorageService {
   private storageSubjects = new Map([
-    [AUTHENTICATED_USER, new BehaviorSubject<string>(localStorage.getItem(AUTHENTICATED_USER))],
-    [TOKEN, new BehaviorSubject<string>(localStorage.getItem(TOKEN))],
-    [USER_ROLE, new BehaviorSubject<string>(localStorage.getItem(USER_ROLE))],
-    [FIRST_NAME, new BehaviorSubject<string>(localStorage.getItem(FIRST_NAME))],
-    [LAST_NAME, new BehaviorSubject<string>(localStorage.getItem(LAST_NAME))],
-    [TODO_LIST, new BehaviorSubject<string>(localStorage.getItem(TODO_LIST))]
+    [AUTHENTICATED_USER, new BehaviorSubject<string>(sessionStorage.getItem(AUTHENTICATED_USER))],
+    [TOKEN, new BehaviorSubject<string>(sessionStorage.getItem(TOKEN))],
+    [USER_ROLE, new BehaviorSubject<string>(sessionStorage.getItem(USER_ROLE))],
+    [FIRST_NAME, new BehaviorSubject<string>(sessionStorage.getItem(FIRST_NAME))],
+    [LAST_NAME, new BehaviorSubject<string>(sessionStorage.getItem(LAST_NAME))],
+    [TODO_LIST, new BehaviorSubject<string>(sessionStorage.getItem(TODO_LIST))]
   ]);
 
  watchStorageItem(key: string): Observable<string>{
@@ -30,18 +30,18 @@ export class StorageService {
 
  setStorageItem(key: string, data: any) {
    if (key == TODO_LIST) {
-     localStorage.setItem(key, JSON.stringify(data))
-   } else { localStorage.setItem(key, data) }
+     sessionStorage.setItem(key, JSON.stringify(data))
+   } else { sessionStorage.setItem(key, data) }
   
   this.storageSubjects.get(key).next(data);
 }
 
  clearStorage() {
-   localStorage.clear();
+   sessionStorage.clear();
 
    // clear out storage by setting to null.
-   this.storageSubjects.get(TOKEN).next(localStorage.getItem(TOKEN));
-   this.storageSubjects.get(AUTHENTICATED_USER).next(localStorage.getItem(AUTHENTICATED_USER));
+   this.storageSubjects.get(TOKEN).next(sessionStorage.getItem(TOKEN));
+   this.storageSubjects.get(AUTHENTICATED_USER).next(sessionStorage.getItem(AUTHENTICATED_USER));
  }
 
   constructor() { }
