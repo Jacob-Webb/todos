@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserDataService } from '../service/data/user-data.service';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
-import { Todo } from '../list-todos/list-todos.component';
+import { Todo } from '../todo/todo.model';
 import { Role } from '../role/role.model';
 
 export class User {
@@ -28,7 +28,7 @@ export class User {
 @Component({
   selector: 'app-list-users',
   templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+  styleUrls: ['./list-users.component.scss']
 })
 export class ListUsersComponent implements OnInit {
   users: User[];

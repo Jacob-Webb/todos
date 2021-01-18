@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
-import { ListTodosComponent } from './list-todos/list-todos.component';
 import { MenuComponent } from './menu/menu.component';
 import { LogoutComponent } from './logout/logout.component';
 
@@ -58,7 +57,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     WelcomeComponent,
     LoginComponent,
     ErrorComponent,
-    ListTodosComponent,
     MenuComponent,
     LogoutComponent,
     TodoComponent,

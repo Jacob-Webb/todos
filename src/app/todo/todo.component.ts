@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
-import { Todo } from '../list-todos/list-todos.component';
+import { Todo } from './todo.model'
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';

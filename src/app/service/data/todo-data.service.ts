@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Todo } from '../../list-todos/list-todos.component';
+import { Todo } from '../../todo/todo.model';
 import { API_URL } from 'src/app/app.constants';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AUTHENTICATED_USER, StorageService, TODO_LIST } from './storage.service';

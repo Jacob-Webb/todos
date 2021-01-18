@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Todo } from '../list-todos/list-todos.component';
+import { Todo } from '../todo/todo.model';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { AUTHENTICATED_USER, StorageService, TODO_LIST } from '../service/data/storage.service';
 import { TodoDataService } from '../service/data/todo-data.service';
