@@ -21,10 +21,6 @@ export class TodoDataService {
  todo: Todo;
  userEmail: string;
 
-  /******************
-  * Http Calls
-  *******************/
-
   getTodoData(email) {
     this.http.get<Todo[]>(`${API_URL}/todos/${email}`)
     .subscribe(todos => {
@@ -60,7 +56,6 @@ export class TodoDataService {
       write over todoList in storage
     */
     this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(email => this.userEmail = email)
-    //this.http.put(`${API_URL}/todos/${todo.id}/${this.userEmail}`, todo).subscribe();
     this.http.put(`${API_URL}/todos/${todo.id}/${this.userEmail}`, todo).subscribe();
     this.todos$.pipe(
       map(todoList => {
@@ -71,19 +66,11 @@ export class TodoDataService {
     ).subscribe();
   }
 
-  createTodo(email, todo): void {
-    /*
-      save to database
-      get id from database
-      set todo id
-      save to storage
-      return home
-    */
-    var id;
-    this.http.post(`${API_URL}/todos/${email}`, todo).pipe(
+  createTodo(todo): void {
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(email => this.userEmail = email)
+    this.http.post(`${API_URL}/todos/${this.userEmail}`, todo).pipe(
       map(data => {
-        id = data;
-        todo.id = id;
+        todo.id = data;
         var todoList = this.todoSubject.getValue();
         todoList.push(todo);
         this.storageService.setStorageItem(TODO_LIST, todoList);

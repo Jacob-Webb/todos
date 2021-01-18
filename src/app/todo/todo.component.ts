@@ -4,7 +4,6 @@ import { Todo } from '../list-todos/list-todos.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { AUTHENTICATED_USER, StorageService } from '../service/data/storage.service';
 
 @Component({
@@ -63,26 +62,13 @@ export class TodoComponent implements OnInit {
     if (this.id == -1) {
       // Create Todo
       this.todo.done = false;
-      this.todoDataService.createTodo(this.userEmail, this.todo);
+      this.todoDataService.createTodo(this.todo);
       this.router.navigate(['home']);
     } else {
       // Update Todo
-      /*
-        Set the "done" value for updated todos
-        update the todo
-        navigate home
-      */
       this.todo.done = this.todoForm.controls['done'].value;
       this.todoDataService.updateTodo(this.todo);
       this.router.navigate(['home']);
-      
-      // this.todoDataService.updateTodo(this.id, this.basicAuthenticationService.getAuthenticatedUser(), this.todo).subscribe(
-      //   data => {
-      //   }
-      // ),
-      // this.router.navigateByUrl('/RefreshComponent', { skipLocationChange: true }).then(() => {
-      //   this.router.navigate(['home']);
-      // });
     }
 
   }
