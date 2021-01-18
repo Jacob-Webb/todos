@@ -51,7 +51,7 @@ export class UserPasswordComponent implements OnInit {
     })
     ).subscribe(
       data => {
-        console.log(data)
+       
       }
     )
     this.passwordMatch = true;

@@ -16,7 +16,6 @@ export class HttpInterceptorBasicAuthService implements HttpInterceptor{
     let basicAuthHeaderString = this.basicAuthenticationService.getAuthenticatedToken();
     let username = this.basicAuthenticationService.getAuthenticatedUser();
 
-
     if (basicAuthHeaderString && username) {
       request = request.clone({
         setHeaders : {

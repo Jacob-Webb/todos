@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     */
    this.user = this.basicAuthenticationService.getAuthenticatedUser();
     if (this.user != null) {
-      this.router.navigate(['todos']);
+      this.router.navigate(['home']);
     }
 
     /*
@@ -48,7 +48,6 @@ export class LoginComponent implements OnInit {
       this.userService.confirmConfirmationToken(this.token)
       .subscribe (
         data => {
-          console.log(data);
         }
       )
     }

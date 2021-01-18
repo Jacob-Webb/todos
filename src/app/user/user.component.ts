@@ -37,14 +37,14 @@ export class UserComponent implements OnInit {
       // Create User
       this.userService.createUser(this.user).subscribe(
         data => {
-          console.log(data)
+          
         }
       )
       this.router.navigate(['user']);
     } else {
       this.userService.updateUser(this.id, this.user).subscribe(
         data => {
-          console.log(data);
+          
         }
       )
       this.router.navigate(['user']);

@@ -8,7 +8,6 @@ import { LoginComponent } from './login/login.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ErrorComponent } from './error/error.component';
-import { ListTodosComponent } from './list-todos/list-todos.component';
 import { MenuComponent } from './menu/menu.component';
 import { LogoutComponent } from './logout/logout.component';
 
@@ -48,6 +47,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ChangePasswordComponent } from './reset-password/change-password/change-password.component';
 import { UserAccountComponent } from './user-account/user-account.component';
 import { UserPasswordComponent } from './user-password/user-password.component';
+import { HomeComponent } from './home/home.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -57,7 +57,6 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     WelcomeComponent,
     LoginComponent,
     ErrorComponent,
-    ListTodosComponent,
     MenuComponent,
     LogoutComponent,
     TodoComponent,
@@ -69,7 +68,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     ResetPasswordComponent,
     ChangePasswordComponent,
     UserAccountComponent,
-    UserPasswordComponent
+    UserPasswordComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
