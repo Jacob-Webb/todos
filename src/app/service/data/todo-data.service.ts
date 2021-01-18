@@ -34,8 +34,9 @@ export class TodoDataService {
     return this.todos$;
   }
 
-  deleteTodo(todoId, email) {
-    return this.http.delete(`${API_URL}/todos/${todoId}/${email}`)
+  deleteTodo(todoId) {
+    this.storageService.watchStorageItem(AUTHENTICATED_USER).subscribe(email => this.userEmail = email)
+    return this.http.delete(`${API_URL}/todos/${todoId}/${this.userEmail}`)
   }
 
   getTodo(todoId) {

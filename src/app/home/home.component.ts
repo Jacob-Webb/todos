@@ -39,12 +39,22 @@ export class HomeComponent implements OnInit {
   }
 
   deleteTodo(id) {
-    this.todoDataService.deleteTodo(id, this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
-      response => {
-        //this.message = `Delete of Todo ${id} Succesful`
-        //this.refreshTodos();
-      }
-    );
+    /*
+      send information to backend
+      get todoList from storage
+      remove todo from todoList
+      Update todoList in storage
+    */
+   //this.todoDataService.deleteTodo(id).subscribe();
+   var todo = this.todoList.find(element => element.id == id)
+   console.log(todo);
+
+    // this.todoDataService.deleteTodo(id, this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
+    //   response => {
+    //     //this.message = `Delete of Todo ${id} Succesful`
+    //     //this.refreshTodos();
+    //   }
+    // );
 
   }
 
