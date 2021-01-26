@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   private token: String;
   passwordResetError: boolean;
+  connectionError: boolean = false;
   passwordError: string;
   passwordSuccess: string;
   user: string;
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     /*
-    * If already logged in, route to Welcome page
+    * If already logged in, route to Home page
     */
    this.user = this.basicAuthenticationService.getAuthenticatedUser();
     if (this.user != null) {
@@ -44,7 +45,8 @@ export class LoginComponent implements OnInit {
     *   send to the backend to complete confirmation
     */
     this.token = this.route.snapshot.params['token'];
-    if (this.token != null) {
+    if (this.token != 'error' && this.token!= null) {
+
       this.userService.confirmConfirmationToken(this.token)
       .subscribe (
         data => {

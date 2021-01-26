@@ -3,7 +3,7 @@
     <div *ngIf="">
       <p>Looks like you don't have any upcoming tasks!</p>
     </div>
-    <button mat-raised-button color="primary" (click)="createTodo()" class="btn btn-primary">Add Todo</button>
+    <button mat-raised-button color="primary" (click)="createTodo()" class="btn btn-primary"><mat-icon aria-hidden="false" aria-label="Add Icon">add_circle</mat-icon></button>
 
     <div *ngFor="let todo of todoList" class="card-container">
       <mat-card *ngIf="!todo.done">
@@ -18,15 +18,15 @@
           {{todo.targetDate | date:'shortDate':'UTC' | uppercase}}
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="primary" (click)="updateTodo(todo.id)" class="btn btn-success">Update</button>
-          <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button>
+          <button mat-raised-button color="primary" (click)="updateTodo(todo.id)" class="btn btn-success"><mat-icon aria-hidden="false" aria-label="Edit Icon">edit</mat-icon></button>
+          <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)" class="btn btn-warning"><mat-icon aria-hidden="false" aria-label="Delete Icon">delete</mat-icon></button>
         </mat-card-actions>
       </mat-card>
     </div>
   <br>
   <div *ngFor="let todo of todoList" class="card-container">
     <mat-card *ngIf="todo.done">
-      <mat-card-title>{{todo.title}} <span style="font-size:.8em">(completed)</span></mat-card-title>
+      <mat-card-title>{{todo.title}} <span style="font-size:.8em"><mat-icon aria-hidden="false" aria-label="Done Icon">done_outline</mat-icon></span></mat-card-title>
       <mat-card-content>
         
         <br>
@@ -37,8 +37,8 @@
         {{todo.targetDate | date:'shortDate':'UTC' | uppercase}}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="updateTodo(todo.id)" class="btn btn-success">Update</button>
-        <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button>
+        <button mat-raised-button color="primary" (click)="updateTodo(todo.id)" class="btn btn-success"><mat-icon aria-hidden="false" aria-label="Edit Icon">edit</mat-icon></button>
+        <button mat-raised-button color="primary" (click)="deleteTodo(todo.id)" class="btn btn-warning"><mat-icon aria-hidden="false" aria-label="Delete Icon">delete</mat-icon></button>
       </mat-card-actions>
     </mat-card>
   </div>

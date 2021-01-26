@@ -72,11 +72,12 @@ export class TodoDataService {
     this.http.post(`${API_URL}/todos/${this.userEmail}`, todo).pipe(
       map(data => {
         todo.id = data;
-        var todoList = this.todoSubject.getValue();
-        todoList.push(todo);
-        this.storageService.setStorageItem(TODO_LIST, todoList);
+
       })
     ).subscribe();
+    var todoList = this.todoSubject.getValue();
+    todoList.push(todo);
+    this.storageService.setStorageItem(TODO_LIST, todoList);
   }
 
 }

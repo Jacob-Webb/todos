@@ -30,18 +30,18 @@ export class StorageService {
 
  setStorageItem(key: string, data: any) {
    if (key == TODO_LIST) {
-     localStorage.setItem(key, JSON.stringify(data))
-   } else { localStorage.setItem(key, data) }
+     sessionStorage.setItem(key, JSON.stringify(data))
+   } else { sessionStorage.setItem(key, data) }
   
   this.storageSubjects.get(key).next(data);
 }
 
  clearStorage() {
-   localStorage.clear();
+   sessionStorage.clear();
 
    // clear out storage by setting to null.
-   this.storageSubjects.get(TOKEN).next(localStorage.getItem(TOKEN));
-   this.storageSubjects.get(AUTHENTICATED_USER).next(localStorage.getItem(AUTHENTICATED_USER));
+   this.storageSubjects.get(TOKEN).next(sessionStorage.getItem(TOKEN));
+   this.storageSubjects.get(AUTHENTICATED_USER).next(sessionStorage.getItem(AUTHENTICATED_USER));
  }
 
   constructor() { }

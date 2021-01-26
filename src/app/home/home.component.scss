@@ -2,6 +2,10 @@ mat-card
 {
   margin: 10px 0;
 }
+mat-card-title 
+{
+  text-decoration:underline;
+}
 mat-card-actions
 {
   display:flex;
