@@ -16,12 +16,12 @@ export const TODO_LIST = "todoList"
 })
 export class StorageService {
   private storageSubjects = new Map([
-    [AUTHENTICATED_USER, new BehaviorSubject<string>(sessionStorage.getItem(AUTHENTICATED_USER))],
-    [TOKEN, new BehaviorSubject<string>(sessionStorage.getItem(TOKEN))],
-    [USER_ROLE, new BehaviorSubject<string>(sessionStorage.getItem(USER_ROLE))],
-    [FIRST_NAME, new BehaviorSubject<string>(sessionStorage.getItem(FIRST_NAME))],
-    [LAST_NAME, new BehaviorSubject<string>(sessionStorage.getItem(LAST_NAME))],
-    [TODO_LIST, new BehaviorSubject<string>(sessionStorage.getItem(TODO_LIST))]
+    [AUTHENTICATED_USER, new BehaviorSubject<string>(localStorage.getItem(AUTHENTICATED_USER))],
+    [TOKEN, new BehaviorSubject<string>(localStorage.getItem(TOKEN))],
+    [USER_ROLE, new BehaviorSubject<string>(localStorage.getItem(USER_ROLE))],
+    [FIRST_NAME, new BehaviorSubject<string>(localStorage.getItem(FIRST_NAME))],
+    [LAST_NAME, new BehaviorSubject<string>(localStorage.getItem(LAST_NAME))],
+    [TODO_LIST, new BehaviorSubject<string>(localStorage.getItem(TODO_LIST))]
   ]);
 
  watchStorageItem(key: string): Observable<string>{

@@ -1,4 +1,5 @@
 <div class="login-container">
+  <h4 *ngIf="connectionError == false"></h4>
   <h4 *ngIf="passwordError != null">There was an issue resetting your password</h4>
   <h4 *ngIf="passwordSuccess != null">You have successfully changed your password</h4>
 <mat-card>
